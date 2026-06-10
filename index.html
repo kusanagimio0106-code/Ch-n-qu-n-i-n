@@ -426,6 +426,7 @@
     <button class="filter-tab" onclick="setFilter('nuong')">🔥 Nướng</button>
     <button class="filter-tab" onclick="setFilter('nhau')">🍺 Nhậu</button>
     <button class="filter-tab" onclick="setFilter('nhat')">🍣 Nhật</button>
+    <button class="filter-tab" onclick="setFilter('choi')">🎡 Đi chơi</button>
   </div>
 
   <div id="rest-list"></div>
@@ -446,6 +447,7 @@
         <button class="type-btn" data-type="nuong" onclick="selectType(this)">🔥 Nướng</button>
         <button class="type-btn" data-type="nhau" onclick="selectType(this)">🍺 Nhậu</button>
         <button class="type-btn" data-type="nhat" onclick="selectType(this)">🍣 Nhật</button>
+        <button class="type-btn" data-type="choi" onclick="selectType(this)">🎡 Đi chơi</button>
       </div>
     </div>
     <div class="field">
@@ -473,6 +475,7 @@
     nuong: { label: 'Nướng', icon: '🔥' },
     nhau:  { label: 'Nhậu',  icon: '🍺' },
     nhat:  { label: 'Nhật',  icon: '🍣' },
+    choi:  { label: 'Đi chơi', icon: '🎡' },
   };
 
   const DEFAULT_DATA = [
@@ -539,9 +542,8 @@
   function setFilter(f) {
     currentFilter = f;
     document.querySelectorAll('.filter-tab').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.includes(
-        f === 'all' ? 'Tất cả' : TYPE_INFO[f]?.label
-      ));
+      const label = f === 'all' ? 'Tất cả' : TYPE_INFO[f]?.label;
+      btn.classList.toggle('active', label && btn.textContent.includes(label));
     });
     renderList();
   }
@@ -610,7 +612,7 @@
 
   function openAddModal() {
     editMode = false; editIdx = null;
-    document.getElementById('modal-title').textContent = 'Thêm Quán Mới 🍜';
+    document.getElementById('modal-title').textContent = 'Thêm Địa Điểm Mới 🍜';
     document.getElementById('input-name').value = '';
     document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('selected', b.dataset.type === 'lau'));
     currentType = 'lau';
